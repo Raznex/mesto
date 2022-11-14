@@ -6,7 +6,6 @@
   font-family: "Inter", Arial, sans-serif;
   align-items: center;
   justify-content: space-between;
-  position: relative;
 }
 
 @media screen and (max-width: 660px) {
@@ -16,7 +15,5 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    justify-content: space-between;
-    position: relative;
   }
 }
