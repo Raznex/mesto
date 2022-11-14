@@ -1,36 +1,31 @@
-.header {
-  width: 100%;
+.footer {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   align-items: flex-start;
-  margin: 45px auto 36px;
-  box-sizing: border-box;
   padding: 0 200px;
+  margin: 67px 0 60px;
+  font-family: "Inter", Arial, sans-serif;
 }
-
 @media screen and (max-width: 1054px) {
-  .header {
+  .footer {
     padding: 0 150px;
   }
 }
 
 @media screen and (max-width: 954px) {
-  .header {
+  .footer {
     padding: 0 100px;
-    margin-top: 36px;
   }
 }
 
 @media screen and (max-width: 860px) {
-  .header {
+  .footer {
     padding: 0 50px;
-    margin: 28px 0 42px;
   }
 }
 
 @media screen and (max-width: 680px) {
-  .header {
+  .footer {
+    margin: 48px 19px 36px;
     padding: 0;
   }
 }
