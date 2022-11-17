@@ -12,7 +12,6 @@
 <body class="page">
 <header class="header">
   <img src="./images/header__title.svg" alt="Место" class="header__logo">
-  <div class="header__line"></div>
 </header>
 <main class="content">
   <section class="profile">
@@ -27,15 +26,6 @@
       </div>
     </div>
     <button type="button" class="profile__add-button"></button>
-    <div class="popup">
-      <form class="popup__container">
-        <button class="popup__close"></button>
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <input type="text" value="Жак-Ив Кусто" class="popup__name">
-        <input type="text" value="Исследователь океана" class="popup__profession">
-        <button type="submit" class="popup__save">Сохранить</button>
-      </form>
-    </div>
   </section>
   <section class="elements">
     <article class="element">
@@ -90,6 +80,17 @@
 <footer class="footer">
   <p class="footer__author">&copy; 2020 Mesto Russia</p>
 </footer>
+<div class="popup">
+  <div class="popup__container">
+    <button class="popup__close"></button>
+    <h2 class="popup__title">Редактировать профиль</h2>
+    <form action="" class="popup__form">
+      <input type="text" value="Жак-Ив Кусто" class="popup__name">
+      <input type="text" value="Исследователь океана" class="popup__profession">
+      <button type="submit" class="popup__save">Сохранить</button>
+    </form>
+  </div>
+</div>
 <script src="./scripts/script.js"></script>
 </body>
 </html>
