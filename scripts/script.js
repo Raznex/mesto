@@ -1,29 +1,35 @@
 const popupElement = document.querySelector(".popup"); // Воспользуйтесь методом querySelector()
-const nameInput = popupElement.querySelector(".popup__name"); // Воспользуйтесь инструментом .querySelector()
-const jobInput = popupElement.querySelector(".popup__profession"); // Воспользуйтесь инструментом .querySelector()
+let nameInput = popupElement.querySelector(".popup__name"); // Воспользуйтесь инструментом .querySelector()
+let jobInput = popupElement.querySelector(".popup__profession"); // Воспользуйтесь инструментом .querySelector()
 const popupCloseButton = popupElement.querySelector(".popup__close");
 const popupOpenButton = document.querySelector(".profile__edit-button");
-const formSubmit = popupElement.querySelector('.popup__save');
-
-const openPopupVisibility = function () {
+let nameForm = document.querySelector('.profile__name');
+let professionForm = document.querySelector('.profile__profession');
+const openPopup = function () {
   popupElement.classList.add("popup_is-opened");
+  nameInput.value = nameForm.innerHTML;
+  jobInput.value = professionForm.innerHTML;
 };
-const closePopupVisibility = function () {
+const closePopup = function () {
   popupElement.classList.remove("popup_is-opened");
 };
 
-popupOpenButton.addEventListener("click", openPopupVisibility);
-popupCloseButton.addEventListener("click", closePopupVisibility);
-
+const closePopupOverlay = function (event) {
+  if (event.target === event.currentTarget) {
+    closePopup();
+  }
+}
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
-  const nameChange = document.querySelector('.profile__name');
-  const professionChange = document.querySelector('.profile__profession');
-  nameChange.textContent = nameInput.value;
-  professionChange.textContent = jobInput.value;
+  nameForm.textContent = nameInput.value;
+  professionForm.textContent = jobInput.value;
+  closePopup()
 }
 
+popupOpenButton.addEventListener("click", openPopup);
+popupCloseButton.addEventListener("click", closePopup);
+popupElement.addEventListener("click", closePopupOverlay);
 popupElement.addEventListener('submit', formSubmitHandler);
 
 
