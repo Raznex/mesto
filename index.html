@@ -28,53 +28,17 @@
     <button type="button" class="profile__add-button"></button>
   </section>
   <section class="elements">
-    <article class="element">
-      <img src="./images/element-karachaev.jpg" alt="Карачаевск" class="element__image">
+    <!-- <article class="element">
+      <div class="element__image">
+        <button class="element__delete-button">
+        </button>
+      </div>
       <div class="element__vote">
         <h2 class="element__title">Карачаевск</h2>
         <button type="button" class="element__like-button">
         </button>
       </div>
-    </article>
-    <article class="element">
-      <img src="./images/element-elbrus.jpg" alt="Эльбрус" class="element__image">
-      <div class="element__vote">
-        <h2 class="element__title">Гора Эльбрус</h2>
-        <button type="button" class="element__like-button">
-        </button>
-      </div>
-    </article>
-    <article class="element">
-      <img src="./images/element-dombai.jpg" alt="Домбай" class="element__image">
-      <div class="element__vote">
-        <h2 class="element__title">Домбай</h2>
-        <button type="button" class="element__like-button">
-        </button>
-      </div>
-    </article>
-    <article class="element">
-      <img src="./images/element-elbrus.jpg" alt="Эльбрус" class="element__image">
-      <div class="element__vote">
-        <h2 class="element__title">Гора Эльбрус</h2>
-        <button type="button" class="element__like-button">
-        </button>
-      </div>
-    </article>
-    <article class="element">
-      <img src="./images/element-dombai.jpg" alt="Домбай" class="element__image">
-      <div class="element__vote">
-        <h2 class="element__title">Домбай</h2>
-        <button type="button" class="element__like-button">
-        </button>
-      </div>
-    </article>
-    <article class="element">
-      <img src="./images/element-karachaev.jpg" alt="Карачаевск" class="element__image">
-      <div class="element__vote">
-        <h2 class="element__title">Карачаево-Черкесск</h2>
-        <button type="button" class="element__like-button"></button>
-      </div>
-    </article>
+    </article> -->
   </section>
 </main>
 <footer class="footer">
@@ -91,6 +55,30 @@
     </form>
   </div>
 </div>
+<!-- <div class="popup-card">
+  <div class="popup1__container">
+    <button class="popup1__close"></button>
+    <h2 class="popup1__title">Новое место</h2>
+    <form class="popup1__form">
+      <input type="text" value="" placeholder="Новое место" class="popup1__name ">
+      <input type="url" value="" placeholder="Ссылка на картинку" class="popup1__profession">
+      <button type="submit" class="popup1__save">Создать</button>
+    </form>
+  </div>
+</div> -->
 <script src="./scripts/script.js"></script>
+
+<template id="card">
+  <div class="element__image">
+    <button class="element__delete-button">
+    </button>
+  </div>
+  <div class="element__vote">
+    <h2 class="element__title">Карачаевск</h2>
+    <button type="button" class="element__like-button">
+    </button>
+  </div>
+</template>
+
 </body>
 </html>

@@ -1,10 +1,39 @@
+let nameForm = document.querySelector('.profile__name');
 const popupElement = document.querySelector(".popup"); // Воспользуйтесь методом querySelector()
+let professionForm = document.querySelector('.profile__profession');
 let nameInput = popupElement.querySelector(".popup__name"); // Воспользуйтесь инструментом .querySelector()
 let jobInput = popupElement.querySelector(".popup__profession"); // Воспользуйтесь инструментом .querySelector()
 const popupCloseButton = popupElement.querySelector(".popup__close");
 const popupOpenButton = document.querySelector(".profile__edit-button");
-let nameForm = document.querySelector('.profile__name');
-let professionForm = document.querySelector('.profile__profession');
+
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+const cardList = document.querySelector('#card');
+console.log(cardList);
 const openPopup = function () {
   popupElement.classList.add("popup_is-opened");
   nameInput.value = nameForm.innerHTML;
@@ -13,7 +42,6 @@ const openPopup = function () {
 const closePopup = function () {
   popupElement.classList.remove("popup_is-opened");
 };
-
 const closePopupOverlay = function (event) {
   if (event.target === event.currentTarget) {
     closePopup();

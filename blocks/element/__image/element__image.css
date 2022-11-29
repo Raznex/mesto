@@ -1,4 +1,8 @@
 .element__image{
   object-fit: cover;
-
+  background-image: url(../../../images/element-elbrus.jpg);
+  width: 100%;
+  min-height: 282px;
+  display: flex;
+  justify-content: flex-end;
 }
