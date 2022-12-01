@@ -5,7 +5,8 @@ let nameInput = popupElement.querySelector(".popup__name"); // Воспольз�
 let jobInput = popupElement.querySelector(".popup__profession"); // Воспользуйтесь инструментом .querySelector()
 const popupCloseButton = popupElement.querySelector(".popup__close");
 const popupOpenButton = document.querySelector(".profile__edit-button");
-
+const cardElement = document.querySelector('.elements');
+const cardsTemplate = document.querySelector('#card-add').content.querySelector('.element');
 const initialCards = [
   {
     name: 'Архыз',
@@ -32,8 +33,20 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-const cardList = document.querySelector('#card');
-console.log(cardList);
+
+function createCards(item) {
+  const newCard = cardsTemplate.cloneNode(true);
+  const nameCards = newCard.querySelector('.element__title')
+  const photoCards = newCard.querySelector('.element__image');
+  nameCards.textContent = item.name;
+  photoCards.src = item.link;
+  return newCard;
+
+}
+initialCards.forEach(function (item){
+  const cardTitle = createCards(item);
+  cardElement.append(cardTitle);
+})
 const openPopup = function () {
   popupElement.classList.add("popup_is-opened");
   nameInput.value = nameForm.innerHTML;
@@ -59,7 +72,6 @@ popupOpenButton.addEventListener("click", openPopup);
 popupCloseButton.addEventListener("click", closePopup);
 popupElement.addEventListener("click", closePopupOverlay);
 popupElement.addEventListener('submit', formSubmitHandler);
-
 
 // const cards = document.querySelectorAll(".element__like-button");
 // const btn1 = cards[0];

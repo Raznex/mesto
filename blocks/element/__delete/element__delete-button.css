@@ -10,6 +10,7 @@
   background-size: 20px 19px;
   opacity: 1;
   transition: opacity 0.5s ease 0s;
+  position: absolute;
 }
 
 .element__delete-button:hover {
