@@ -34,6 +34,8 @@
 /*footer*/
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__author/footer__author.css);
+/* popup-card */
+@import url(../blocks/popup-card/popup-card.css);
 /*popup*/
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/__container/popup__container.css);
@@ -44,6 +46,5 @@
 @import url(../blocks/popup/__close/popup__close.css);
 @import url(../blocks/popup/_is-opened/popup_is-opened.css);
 @import url(../blocks/popup/__form/popup__form.css);
-/* popup-card */
-@import url(../blocks/popup-card/popup-card.css);
+
 

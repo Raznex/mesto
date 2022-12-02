@@ -1,12 +1,17 @@
 let nameForm = document.querySelector('.profile__name');
 const popupElement = document.querySelector(".popup"); // Воспользуйтесь методом querySelector()
+const popupCardElement = document.querySelector(".popup-card");
 let professionForm = document.querySelector('.profile__profession');
 let nameInput = popupElement.querySelector(".popup__name"); // Воспользуйтесь инструментом .querySelector()
 let jobInput = popupElement.querySelector(".popup__profession"); // Воспользуйтесь инструментом .querySelector()
 const popupCloseButton = popupElement.querySelector(".popup__close");
 const popupOpenButton = document.querySelector(".profile__edit-button");
+const popupCardOpenButton = document.querySelector('.profile__add-button');
+const popupCardCloseButton = popupCardElement.querySelector('.popup__close');
 const cardElement = document.querySelector('.elements');
 const cardsTemplate = document.querySelector('#card-add').content.querySelector('.element');
+let titleInput = popupCardElement.querySelector('.popup__name');
+let urlInput = popupCardElement.querySelector('.popup__profession');
 const initialCards = [
   {
     name: 'Архыз',
@@ -34,31 +39,31 @@ const initialCards = [
   }
 ];
 
-function createCards(item) {
-  const newCard = cardsTemplate.cloneNode(true);
-  const nameCards = newCard.querySelector('.element__title')
-  const photoCards = newCard.querySelector('.element__image');
-  nameCards.textContent = item.name;
-  photoCards.src = item.link;
-  return newCard;
-
-}
-initialCards.forEach(function (item){
-  const cardTitle = createCards(item);
-  cardElement.append(cardTitle);
-})
-const openPopup = function () {
+const openPopup = () => {
   popupElement.classList.add("popup_is-opened");
   nameInput.value = nameForm.innerHTML;
   jobInput.value = professionForm.innerHTML;
 };
-const closePopup = function () {
+const openCardPopup = () => {
+  popupCardElement.classList.add("popup_is-opened");
+  titleInput.value = '';
+  urlInput.value = '';
+};
+const closePopup = () => {
   popupElement.classList.remove("popup_is-opened");
+};
+const closeCardPopup = () => {
+  popupCardElement.classList.remove("popup_is-opened");
 };
 const closePopupOverlay = function (event) {
   if (event.target === event.currentTarget) {
     closePopup();
+    closeCardPopup();
   }
+}
+const simpleNewCard = (item, element) => {
+  const cardTitle = createCards(item);
+  element.prepend(cardTitle);
 }
 
 function formSubmitHandler(evt) {
@@ -68,51 +73,39 @@ function formSubmitHandler(evt) {
   closePopup()
 }
 
+function createCards(item) {
+  const newCard = cardsTemplate.cloneNode(true);
+  const nameCards = newCard.querySelector('.element__title')
+  const photoCards = newCard.querySelector('.element__image');
+  nameCards.textContent = item.name;
+  photoCards.src = item.link;
+  return newCard;
+}
+
+function cardSubmitHandler(evt) {
+  evt.preventDefault();
+  const initialCards = {
+    name: titleInput.value,
+    link: urlInput.value
+  };
+  simpleNewCard(initialCards, cardElement);
+  closeCardPopup()
+}
+
+initialCards.forEach(function (item){
+  simpleNewCard(item, cardElement);
+})
+popupCardOpenButton.addEventListener("click", openCardPopup);
+popupCardCloseButton.addEventListener("click", closeCardPopup);
 popupOpenButton.addEventListener("click", openPopup);
 popupCloseButton.addEventListener("click", closePopup);
 popupElement.addEventListener("click", closePopupOverlay);
+popupCardElement.addEventListener("click", closePopupOverlay);
 popupElement.addEventListener('submit', formSubmitHandler);
+popupCardElement.addEventListener('submit', cardSubmitHandler);
 
 // const cards = document.querySelectorAll(".element__like-button");
 // const btn1 = cards[0];
-// const btn2 = cards[1];
-// const btn3 = cards[2];
-// const btn4 = cards[3];
-// const btn5 = cards[4];
-// const btn6 = cards[5];
-//
 // const likeButton1Activated = function () {
 //   btn1.classList.toggle("element__like-button_active");
 // }
-//
-// btn1.addEventListener("click", likeButton1Activated);
-//
-// const likeButton2Activated = function () {
-//   btn2.classList.toggle("element__like-button_active");
-// }
-//
-// btn2.addEventListener("click", likeButton2Activated);
-//
-// const likeButton3Activated = function () {
-//   btn3.classList.toggle("element__like-button_active");
-// }
-//
-// btn3.addEventListener("click", likeButton3Activated);
-//
-// const likeButton4Activated = function () {
-//   btn4.classList.toggle("element__like-button_active");
-// }
-//
-// btn4.addEventListener("click", likeButton4Activated);
-//
-// const likeButton5Activated = function () {
-//   btn5.classList.toggle("element__like-button_active");
-// }
-//
-// btn5.addEventListener("click", likeButton5Activated);
-//
-// const likeButton6Activated = function () {
-//   btn6.classList.toggle("element__like-button_active");
-// }
-//
-// btn6.addEventListener("click", likeButton6Activated);
