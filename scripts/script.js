@@ -1,17 +1,24 @@
 let nameForm = document.querySelector('.profile__name');
 const popupElement = document.querySelector(".popup"); // Воспользуйтесь методом querySelector()
 const popupCardElement = document.querySelector(".popup-card");
+const popupPhotoElement = document.querySelector(".popup-photo");
 let professionForm = document.querySelector('.profile__profession');
 let nameInput = popupElement.querySelector(".popup__name"); // Воспользуйтесь инструментом .querySelector()
 let jobInput = popupElement.querySelector(".popup__profession"); // Воспользуйтесь инструментом .querySelector()
-const popupCloseButton = popupElement.querySelector(".popup__close");
 const popupOpenButton = document.querySelector(".profile__edit-button");
 const popupCardOpenButton = document.querySelector('.profile__add-button');
+const popupCloseButton = popupElement.querySelector(".popup__close");
 const popupCardCloseButton = popupCardElement.querySelector('.popup__close');
+const popupPhotoCloseButton = popupPhotoElement.querySelector('.popup__close');
 const cardElement = document.querySelector('.elements');
 const cardsTemplate = document.querySelector('#card-add').content.querySelector('.element');
+const photoFullOpen = cardsTemplate.querySelector('.element__image')
 let titleInput = popupCardElement.querySelector('.popup__name');
 let urlInput = popupCardElement.querySelector('.popup__profession');
+const popupPhotoName = document.querySelector('.popup-photo__name')
+const popUpPhotoOpenScreen = document.querySelector('.popup-photo__image')
+let imageSrcElement = cardsTemplate.querySelector('.element__image')
+let imageTextElement = cardsTemplate.querySelector('.element__title')
 const initialCards = [
   {
     name: 'Архыз',
@@ -49,8 +56,17 @@ const openCardPopup = () => {
   titleInput.value = '';
   urlInput.value = '';
 };
+const popupPhotoOpenClick = () => {
+  popupPhotoElement.classList.add("popup_is-opened");
+  popupPhotoName.textContent =  imageTextElement.textContent;
+  popUpPhotoOpenScreen.src = imageSrcElement.src;
+}
+
 const closePopup = () => {
   popupElement.classList.remove("popup_is-opened");
+};
+const closePhotoPopup = () => {
+  popupPhotoElement.classList.remove("popup_is-opened");
 };
 const closeCardPopup = () => {
   popupCardElement.classList.remove("popup_is-opened");
@@ -59,6 +75,7 @@ const closePopupOverlay = function (event) {
   if (event.target === event.currentTarget) {
     closePopup();
     closeCardPopup();
+    closePhotoPopup();
   }
 }
 const simpleNewCard = (item, element) => {
@@ -77,9 +94,26 @@ function createCards(item) {
   const newCard = cardsTemplate.cloneNode(true);
   const nameCards = newCard.querySelector('.element__title')
   const photoCards = newCard.querySelector('.element__image');
+  const likeCardButton = newCard.querySelector('.element__like-button');
+  const deleteCardButton = newCard.querySelector('.element__delete-button');
+  deleteCardButton.addEventListener('click', deleteButtonClick);
+  likeCardButton.addEventListener('click', likeButtonClick);
   nameCards.textContent = item.name;
   photoCards.src = item.link;
+  photoCards.alt = item.name;
   return newCard;
+}
+
+function photoCardOpen(item) {
+
+
+}
+
+const likeButtonClick = (evt) => {
+  evt.target.classList.toggle("element__like-button_active");
+}
+const deleteButtonClick = (evt) => {
+  evt.target.closest('.element').remove();
 }
 
 function cardSubmitHandler(evt) {
@@ -94,7 +128,10 @@ function cardSubmitHandler(evt) {
 
 initialCards.forEach(function (item){
   simpleNewCard(item, cardElement);
+  photoCardOpen(item);
 })
+
+photoFullOpen.addEventListener('click', popupPhotoOpenClick);
 popupCardOpenButton.addEventListener("click", openCardPopup);
 popupCardCloseButton.addEventListener("click", closeCardPopup);
 popupOpenButton.addEventListener("click", openPopup);
@@ -103,9 +140,4 @@ popupElement.addEventListener("click", closePopupOverlay);
 popupCardElement.addEventListener("click", closePopupOverlay);
 popupElement.addEventListener('submit', formSubmitHandler);
 popupCardElement.addEventListener('submit', cardSubmitHandler);
-
-// const cards = document.querySelectorAll(".element__like-button");
-// const btn1 = cards[0];
-// const likeButton1Activated = function () {
-//   btn1.classList.toggle("element__like-button_active");
-// }
+popupPhotoCloseButton.addEventListener("click", closePhotoPopup);
