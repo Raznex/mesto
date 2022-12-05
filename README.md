@@ -12,4 +12,4 @@
 
 ****
 
-* [Ссылка на GithubPages](https://raznex.github.io/russian-travel/)
+* [Ссылка на GithubPages](https://raznex.github.io/mesto/)
