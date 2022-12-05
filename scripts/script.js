@@ -1,7 +1,7 @@
 let nameForm = document.querySelector('.profile__name');
 const popupElement = document.querySelector(".popup"); // Воспользуйтесь методом querySelector()
-const popupCardElement = document.querySelector(".popup-card");
-const popupPhotoElement = document.querySelector(".popup-photo");
+const popupCardElement = document.querySelector("[name='popup-card']");
+const popupPhotoElement = document.querySelector("[name='popup_photo']");
 let professionForm = document.querySelector('.profile__profession');
 let nameInput = popupElement.querySelector(".popup__name"); // Воспользуйтесь инструментом .querySelector()
 let jobInput = popupElement.querySelector(".popup__profession"); // Воспользуйтесь инструментом .querySelector()
@@ -14,8 +14,8 @@ const cardElement = document.querySelector('.elements');
 const cardsTemplate = document.querySelector('#card-add').content.querySelector('.element');
 let titleInput = popupCardElement.querySelector('.popup__name');
 let urlInput = popupCardElement.querySelector('.popup__profession');
-let popupPhotoName = document.querySelector('.popup-photo__name')
-let popUpPhotoOpenScreen = document.querySelector('.popup-photo__image')
+let popupPhotoName = document.querySelector('.popup__figcaption')
+let popUpPhotoOpenScreen = document.querySelector('.popup__image')
 const initialCards = [
   {
     name: 'Архыз',
@@ -98,8 +98,8 @@ function createCards(item) {
 }
 
 const popupPhotoOpenClick = (evt) => {
-  console.log(evt.target.closest('.element').querySelector('.element__title'))
-  evt.target.closest('.page').querySelector('.popup-photo').classList.add('popup_is-opened')
+  console.log(evt.target.closest('.page').querySelector("[name='popup_photo']"))
+  evt.target.closest('.page').querySelector("[name='popup_photo']").classList.add('popup_is-opened')
   popUpPhotoOpenScreen.src = evt.target.src
   popUpPhotoOpenScreen.alt = evt.target.alt
   popupPhotoName.textContent = evt.target.closest('.element').querySelector('.element__title').textContent;
