@@ -30,7 +30,6 @@
 @import url(../blocks/element/__like-button/_active/element__like-button_active.css);
 @import url(../blocks/element/__delete/element__delete-button.css);
 @import url(../blocks/element/__photocard/element__photocard.css);
-@import url(../blocks/element/__image-button/element__image-button.css);
 
 /*footer*/
 @import url(../blocks/footer/footer.css);

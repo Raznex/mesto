@@ -12,13 +12,10 @@ const popupCardCloseButton = popupCardElement.querySelector('.popup__close');
 const popupPhotoCloseButton = popupPhotoElement.querySelector('.popup__close');
 const cardElement = document.querySelector('.elements');
 const cardsTemplate = document.querySelector('#card-add').content.querySelector('.element');
-const photoFullOpen = cardsTemplate.querySelector('.element__image')
 let titleInput = popupCardElement.querySelector('.popup__name');
 let urlInput = popupCardElement.querySelector('.popup__profession');
-const popupPhotoName = document.querySelector('.popup-photo__name')
-const popUpPhotoOpenScreen = document.querySelector('.popup-photo__image')
-let imageSrcElement = cardsTemplate.querySelector('.element__image')
-let imageTextElement = cardsTemplate.querySelector('.element__title')
+let popupPhotoName = document.querySelector('.popup-photo__name')
+let popUpPhotoOpenScreen = document.querySelector('.popup-photo__image')
 const initialCards = [
   {
     name: 'Архыз',
@@ -56,11 +53,6 @@ const openCardPopup = () => {
   titleInput.value = '';
   urlInput.value = '';
 };
-const popupPhotoOpenClick = () => {
-  popupPhotoElement.classList.add("popup_is-opened");
-  popupPhotoName.textContent =  imageTextElement.textContent;
-  popUpPhotoOpenScreen.src = imageSrcElement.src;
-}
 
 const closePopup = () => {
   popupElement.classList.remove("popup_is-opened");
@@ -98,17 +90,20 @@ function createCards(item) {
   const deleteCardButton = newCard.querySelector('.element__delete-button');
   deleteCardButton.addEventListener('click', deleteButtonClick);
   likeCardButton.addEventListener('click', likeButtonClick);
+  photoCards.addEventListener('click', popupPhotoOpenClick);
   nameCards.textContent = item.name;
   photoCards.src = item.link;
   photoCards.alt = item.name;
   return newCard;
 }
 
-function photoCardOpen(item) {
-
-
+const popupPhotoOpenClick = (evt) => {
+  console.log(evt.target.closest('.element').querySelector('.element__title'))
+  evt.target.closest('.page').querySelector('.popup-photo').classList.add('popup_is-opened')
+  popUpPhotoOpenScreen.src = evt.target.src
+  popUpPhotoOpenScreen.alt = evt.target.alt
+  popupPhotoName.textContent = evt.target.closest('.element').querySelector('.element__title').textContent;
 }
-
 const likeButtonClick = (evt) => {
   evt.target.classList.toggle("element__like-button_active");
 }
@@ -126,12 +121,11 @@ function cardSubmitHandler(evt) {
   closeCardPopup()
 }
 
-initialCards.forEach(function (item){
+initialCards.forEach(function (item) {
   simpleNewCard(item, cardElement);
-  photoCardOpen(item);
 })
 
-photoFullOpen.addEventListener('click', popupPhotoOpenClick);
+
 popupCardOpenButton.addEventListener("click", openCardPopup);
 popupCardCloseButton.addEventListener("click", closeCardPopup);
 popupOpenButton.addEventListener("click", openPopup);
