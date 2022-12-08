@@ -16,7 +16,6 @@ const titleInput = popupCardElement.querySelector('.popup__name');
 const urlInput = popupCardElement.querySelector('.popup__profession');
 const popupPhotoName = document.querySelector('.popup__figcaption')
 const popUpPhotoOpenScreen = document.querySelector('.popup__image')
-const popups = document.querySelectorAll('.popup');
 
 const changeNameEditPopup = () => {
   nameInput.value = nameForm.innerHTML;
@@ -31,13 +30,6 @@ const cleanCardPopupValue = () => {
 const simpleNewCard = (item, element) => {
   const cardTitle = createCards(item);
   element.prepend(cardTitle);
-};
-
-function formSubmitHandler(evt) {
-  evt.preventDefault();
-  nameForm.textContent = nameInput.value;
-  professionForm.textContent = jobInput.value;
-  removePopup(0)
 };
 
 function createCards(item) {
@@ -71,6 +63,13 @@ const deleteButtonClick = (evt) => {
   evt.target.closest('.element').remove();
 };
 
+function formSubmitHandler(evt) {
+  evt.preventDefault();
+  nameForm.textContent = nameInput.value;
+  professionForm.textContent = jobInput.value;
+  removePopup(popupElement)
+};
+
 function cardSubmitHandler(evt) {
   evt.preventDefault();
   const initialCard = {
@@ -78,6 +77,7 @@ function cardSubmitHandler(evt) {
     link: urlInput.value
   };
   simpleNewCard(initialCard, cardElement);
+  removePopup(popupCardElement);
 };
 
 initialCards.forEach(function (item) {
@@ -89,7 +89,7 @@ function addPopup(popupElement) {
   popupElement.classList.add("popup_is-opened");
 };
 
-const removePopup = function (popupElement) {
+function removePopup(popupElement) {
   popupElement.classList.remove("popup_is-opened");
 };
 
@@ -110,4 +110,3 @@ popupPhotoCloseButton.addEventListener("click", function () {
 });
 popupElement.addEventListener('submit', formSubmitHandler);
 popupCardElement.addEventListener('submit', cardSubmitHandler);
-
