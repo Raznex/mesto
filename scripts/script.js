@@ -28,14 +28,6 @@ const cleanCardPopupValue = () => {
   urlInput.value = '';
 };
 
-const closePopupOverlay = function (event) {
-  if (event.target === event.currentTarget) {
-    removePopup(0)
-    removePopup(1)
-    removePopup(2)
-  };
-};
-
 const simpleNewCard = (item, element) => {
   const cardTitle = createCards(item);
   element.prepend(cardTitle);
@@ -57,7 +49,7 @@ function createCards(item) {
   deleteCardButton.addEventListener('click', deleteButtonClick);
   likeCardButton.addEventListener('click', likeButtonClick);
   photoCards.addEventListener('click', function (evt) {
-    changeValuePhotoPopup(evt), addPopup(2);
+    changeValuePhotoPopup(evt), addPopup(popupPhotoElement);
   });
   nameCards.textContent = item.name;
   photoCards.src = item.link;
@@ -93,32 +85,29 @@ initialCards.forEach(function (item) {
 });
 
 
-function addPopup(index) {
-  popups[index].classList.add("popup_is-opened");
+function addPopup(popupElement) {
+  popupElement.classList.add("popup_is-opened");
 };
 
-const removePopup = function (index) {
-  popups[index].classList.remove("popup_is-opened");
+const removePopup = function (popupElement) {
+  popupElement.classList.remove("popup_is-opened");
 };
 
 popupOpenButton.addEventListener("click", function () {
-  changeNameEditPopup(), addPopup(0)
+  changeNameEditPopup(), addPopup(popupElement)
 });
 popupCardOpenButton.addEventListener("click", function () {
-  cleanCardPopupValue(), addPopup(1)
+  cleanCardPopupValue(), addPopup(popupCardElement)
 });
 popupCloseButton.addEventListener("click", function () {
-  removePopup(0);
+  removePopup(popupElement);
 });
 popupCardCloseButton.addEventListener("click", function () {
-  removePopup(1);
+  removePopup(popupCardElement);
 });
 popupPhotoCloseButton.addEventListener("click", function () {
-  removePopup(2);
+  removePopup(popupPhotoElement);
 });
-popupElement.addEventListener("click", closePopupOverlay);
-popupCardElement.addEventListener("click", closePopupOverlay);
-popupPhotoElement.addEventListener("click", closePopupOverlay);
 popupElement.addEventListener('submit', formSubmitHandler);
 popupCardElement.addEventListener('submit', cardSubmitHandler);
 
