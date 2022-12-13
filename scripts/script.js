@@ -93,6 +93,20 @@ function removePopup(popupElement) {
   popupElement.classList.remove("popup_is-opened");
 };
 
+const closePopupOverlay = (evt) => {
+   if (evt.target === evt.currentTarget) {
+    evt.target.closest('.popup_is-opened').classList.remove("popup_is-opened")
+  };
+}
+
+
+const closePopupEscape = (evt) => {
+  if (evt.key === "Escape") {
+    popupPhotoElement.classList.remove("popup_is-opened")
+  };
+};
+
+
 popupOpenButton.addEventListener("click", function () {
   changeNameEditPopup(), addPopup(popupElement)
 });
@@ -108,5 +122,8 @@ popupCardCloseButton.addEventListener("click", function () {
 popupPhotoCloseButton.addEventListener("click", function () {
   removePopup(popupPhotoElement);
 });
+popupElement.addEventListener("click", closePopupOverlay);
+popupCardElement.addEventListener("click", closePopupOverlay);
+popupPhotoElement.addEventListener("click", closePopupOverlay);
 popupElement.addEventListener('submit', formSubmitHandler);
 popupCardElement.addEventListener('submit', cardSubmitHandler);
