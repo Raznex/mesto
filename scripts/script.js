@@ -102,10 +102,10 @@ const closePopupOverlay = (evt) => {
 
 const closePopupEscape = (evt) => {
   if (evt.key === "Escape") {
-    popupPhotoElement.classList.remove("popup_is-opened")
+    document.querySelector('.popup_is-opened').classList.remove("popup_is-opened")
   };
 };
-
+document.addEventListener("keydown", closePopupEscape);
 
 popupOpenButton.addEventListener("click", function () {
   changeNameEditPopup(), addPopup(popupElement)
