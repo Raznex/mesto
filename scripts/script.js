@@ -1,10 +1,8 @@
 const nameForm = document.querySelector('.profile__name');
-const popupElement = document.querySelector(".popup_type_profile-edit"); // Воспользуйтесь методом querySelector()
+const popupElement = document.querySelector(".popup_type_profile-edit");
 const popupCardElement = document.querySelector(".popup_type_card-add");
 const popupPhotoElement = document.querySelector(".popup_type_photo");
 const professionForm = document.querySelector('.profile__profession');
-const nameInput = popupElement.querySelector(".popup__name"); // Воспользуйтесь инструментом .querySelector()
-const jobInput = popupElement.querySelector(".popup__profession"); // Воспользуйтесь инструментом .querySelector()
 const popupOpenButton = document.querySelector(".profile__edit-button");
 const popupCardOpenButton = document.querySelector('.profile__add-button');
 const popupCloseButton = popupElement.querySelector(".popup__close");
@@ -12,8 +10,10 @@ const popupCardCloseButton = popupCardElement.querySelector('.popup__close');
 const popupPhotoCloseButton = popupPhotoElement.querySelector('.popup__close');
 const cardElement = document.querySelector('.elements');
 const cardsTemplate = document.querySelector('#card-add').content.querySelector('.element');
-const titleInput = popupCardElement.querySelector('.popup__name');
-const urlInput = popupCardElement.querySelector('.popup__profession');
+const nameInput = popupElement.querySelector(".popup__input_type_name");
+const jobInput = popupElement.querySelector(".popup__input_type_profession");
+const titleInput = popupCardElement.querySelector('.popup__input_type_name');
+const urlInput = popupCardElement.querySelector('.popup__input_type_profession');
 const popupPhotoName = document.querySelector('.popup__figcaption')
 const popUpPhotoOpenScreen = document.querySelector('.popup__image')
 
