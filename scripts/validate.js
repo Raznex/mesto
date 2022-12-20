@@ -20,7 +20,7 @@ const checkValidity = (input, cfg) => {
   }
 };
 
-const togglebuttonDisabled = (cfg, inputs, button) => {
+const toggleButtonDisabled = (cfg, inputs, button) => {
   const isFormValid = inputs.every((input) => input.validity.valid);
   if (isFormValid) {
     button.classList.remove(cfg.inactiveButtonClass);
@@ -39,7 +39,7 @@ const enableValidation = (cfg) => {
     inputs.forEach((input) => {
       input.addEventListener("input", () => {
         checkValidity(input, cfg);
-        togglebuttonDisabled(cfg, inputs, button);
+        toggleButtonDisabled(cfg, inputs, button);
       });
     });
   });

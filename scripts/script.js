@@ -108,7 +108,7 @@ const closePopupOverlay = (evt) => {
 
 const closePopupEscape = (evt, popup) => {
    if (evt.key === "Escape") {
-    document.querySelector('.popup_is-opened').removePopup(popup)
+    removePopup(document.querySelector('.popup_is-opened'))
    }
 };
 
