@@ -18,6 +18,7 @@ const popupPhotoName = document.querySelector('.popup__figcaption')
 const popUpPhotoOpenScreen = document.querySelector('.popup__image')
 const formAddPopup = popupCardElement.querySelector('#popup-add-form')
 const formEditPopup = popupEditProfile.querySelector('#popup-edit-form')
+const buttonSubmitCard = popupCardElement.querySelector('.popup__save')
 
 const changeNameEditPopup = () => {
   nameInput.value = nameForm.textContent;
@@ -25,6 +26,8 @@ const changeNameEditPopup = () => {
 };
 
 const cleanCardPopupValue = () => {
+  buttonSubmitCard.classList.add('popup__save_disabled');
+  buttonSubmitCard.disabled = true;
   titleInput.value = '';
   urlInput.value = '';
 };
@@ -104,9 +107,9 @@ const closePopupOverlay = (evt) => {
 }
 
 const closePopupEscape = (evt, popup) => {
-  if (evt.key === "Escape") {
-    removePopup(popup)
-  };
+   if (evt.key === "Escape") {
+    document.querySelector('.popup_is-opened').removePopup(popup)
+   }
 };
 
 popupOpenButton.addEventListener("click", function () {

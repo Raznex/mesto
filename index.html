@@ -38,7 +38,7 @@
   <div class="popup__container">
     <button name='Popup-edit-close' class="popup__close"></button>
     <h2 class="popup__title">Редактировать профиль</h2>
-    <form id="popup-edit-form" class="popup__form">
+    <form id="popup-edit-form" class="popup__form" novalidate>
       <input name='Popup-edit-name' id="edit-name-input" type="text" value="Жак-Ив Кусто" placeholder="Ваше имя"
              minlength="2" maxlength="40"
              required
@@ -58,7 +58,7 @@
   <div class="popup__container">
     <button name='Popup-Card-Close' class="popup__close"></button>
     <h2 class="popup__title">Новое место</h2>
-    <form id="popup-add-form" class="popup__form">
+    <form id="popup-add-form" class="popup__form" novalidate>
       <input name='Popup-Card-name' id="add-name-input" type="text" value="" placeholder="Название" minlength="2"
              maxlength="30" required
              class="popup__input popup__input_type_name">
@@ -66,7 +66,7 @@
       <input name='Popup-Card-src' id="add-url-input" type="url" value="" placeholder="Ссылка на картинку" required
              class="popup__input popup__input_type_profession">
       <span id="add-url-input-error" class="popup__input-span popup__input-span_type_profession"></span>
-      <button type="submit" name="button_add_save" class="popup__save popup__save_disabled">Создать</button>
+      <button type="submit" name="button_add_save" class="popup__save">Создать</button>
     </form>
   </div>
 </div>

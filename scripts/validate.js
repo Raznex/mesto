@@ -1,49 +1,54 @@
+const removeValidityMessage = (cfg, input) => {
+  const error = document.querySelector(`#${input.id}-error`);
+  error.textContent = "";
+  error.classList.remove(cfg.inputErrorClass);
+  input.classList.remove(cfg.errorClass);
+};
+
+const spawnValidityMessage = (cfg, input) => {
+  const error = document.querySelector(`#${input.id}-error`);
+  error.textContent = input.validationMessage;
+  error.classList.add(cfg.inputErrorClass);
+  input.classList.add(cfg.errorClass);
+};
 const checkValidity = (input, cfg) => {
-  const error = document.querySelector(`#${input.id}-error`)
   if (input.validity.valid) {
-    error.textContent = '';
-    error.classList.remove(cfg.inputErrorClass);
-    input.classList.remove(cfg.errorClass);
+    removeValidityMessage(cfg, input)
   } else {
-    error.textContent = input.validationMessage;
-    error.classList.add(cfg.inputErrorClass);
-    input.classList.add(cfg.errorClass);
+    console.log(1)
+    spawnValidityMessage(cfg, input)
   }
-}
+};
 
-const buttonDisabled = (cfg, inputs, button) => {
-  const isFormValid = inputs.every(input => input.validity.valid);
-
+const togglebuttonDisabled = (cfg, inputs, button) => {
+  const isFormValid = inputs.every((input) => input.validity.valid);
   if (isFormValid) {
     button.classList.remove(cfg.inactiveButtonClass);
-    button.disabled = '';
+    button.disabled = "";
   } else {
     button.classList.add(cfg.inactiveButtonClass);
-    button.disabled = 'disabled';
+    button.disabled = true;
   }
-}
+};
 
 const enableValidation = (cfg) => {
   const forms = [...document.querySelectorAll(cfg.formSelector)];
-  forms.forEach(form => {
+  forms.forEach((form) => {
     const inputs = [...form.querySelectorAll(cfg.inputSelector)];
     const button = form.querySelector(cfg.submitButtonSelector);
-    form.addEventListener('submit', (e) => {
-      e.preventDefault()
-    })
-    inputs.forEach(input => {
-      input.addEventListener('input', () => {
-        checkValidity(input, cfg)
-        buttonDisabled(cfg, inputs, button)
+    inputs.forEach((input) => {
+      input.addEventListener("input", () => {
+        checkValidity(input, cfg);
+        togglebuttonDisabled(cfg, inputs, button);
       });
     });
-  })
-}
+  });
+};
 enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save',
-  inactiveButtonClass: 'popup__save_disabled',
-  inputErrorClass: 'popup__input-span_type_error',
-  errorClass: 'popup__input-span_type_error-visible'
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__save",
+  inactiveButtonClass: "popup__save_disabled",
+  inputErrorClass: "popup__input-span_type_error",
+  errorClass: "popup__input-span_type_error-visible",
 });
