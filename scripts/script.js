@@ -6,8 +6,6 @@ const professionForm = document.querySelector('.profile__profession');
 const popupOpenButton = document.querySelector(".profile__edit-button");
 const popupCardOpenButton = document.querySelector('.profile__add-button');
 const popupCloseButtonList = document.querySelectorAll(".popup__close");
-const popupCardCloseButton = popupCardElement.querySelector('.popup__close');
-const popupPhotoCloseButton = popupPhotoElement.querySelector('.popup__close');
 const cardElement = document.querySelector('.elements');
 const cardsTemplate = document.querySelector('#card-add').content.querySelector('.element');
 const nameInput = popupEditProfile.querySelector(".popup__input_type_name");
@@ -46,7 +44,8 @@ function createCards(item) {
   deleteCardButton.addEventListener('click', handleButtonDelete);
   likeCardButton.addEventListener('click', handleButtonLike);
   photoCards.addEventListener('click', function () {
-    changeValuePhotoPopup(nameCards, photoCards), addPopup(popupPhotoElement);
+    changeValuePhotoPopup(nameCards, photoCards);
+    addPopup(popupPhotoElement);
   });
   nameCards.textContent = item.name;
   photoCards.src = item.link;
@@ -69,7 +68,7 @@ const handleButtonDelete = (evt) => {
   evt.target.closest('.element').remove();
 };
 
-function submitFormHandler(evt) {
+function submitEditFormHandler(evt) {
   evt.preventDefault();
   nameForm.textContent = nameInput.value;
   professionForm.textContent = jobInput.value;
@@ -104,7 +103,6 @@ const closePopupOverlay = (evt) => {
   if (evt.target === evt.currentTarget) {
     removePopup(evt.target)
   }
-  ;
 }
 
 const closePopupEscape = (evt) => {
@@ -114,7 +112,8 @@ const closePopupEscape = (evt) => {
 };
 
 popupCloseButtonList.forEach(btn => {
-  btn.addEventListener('click', () => removePopup(btn.closest('.popup')));
+  const popup = btn.closest('.popup')
+  btn.addEventListener('click', () => removePopup(popup));
 })
 
 popupOpenButton.addEventListener("click", function () {
@@ -128,5 +127,5 @@ popupCardOpenButton.addEventListener("click", function () {
 popupEditProfile.addEventListener("mousedown", closePopupOverlay);
 popupCardElement.addEventListener("mousedown", closePopupOverlay);
 popupPhotoElement.addEventListener("mousedown", closePopupOverlay);
-formEditPopup.addEventListener('submit', submitFormHandler);
+formEditPopup.addEventListener('submit', submitEditFormHandler);
 formAddPopup.addEventListener('submit', submitCardHandler);
