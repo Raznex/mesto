@@ -1,3 +1,5 @@
+import {initialCards} from "./cards.js";
+
 const nameForm = document.querySelector('.profile__name');
 const popupEditProfile = document.querySelector(".popup_type_profile-edit");
 const popupCardElement = document.querySelector(".popup_type_card-add");
