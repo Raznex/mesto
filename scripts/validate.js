@@ -15,7 +15,6 @@ const checkValidity = (input, cfg) => {
   if (input.validity.valid) {
     removeValidityMessage(cfg, input)
   } else {
-    console.log(1)
     spawnValidityMessage(cfg, input)
   }
 };
