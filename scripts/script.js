@@ -2,7 +2,7 @@ import {initialCards} from "./cards.js";
 import {Card} from "./card.js";
 const nameForm = document.querySelector('.profile__name');
 const popupEditProfile = document.querySelector(".popup_type_profile-edit");
-const popupCardElement = document.querySelector(".popup_type_card-add");
+export const popupCardElement = document.querySelector(".popup_type_card-add");
 export const popupPhotoElement = document.querySelector(".popup_type_photo");
 const professionForm = document.querySelector('.profile__profession');
 const popupOpenButton = document.querySelector(".profile__edit-button");
@@ -31,16 +31,16 @@ const cleanCardPopupValue = () => {
   urlInput.value = '';
 };
 
-const createNewCard = (item, element) => {
-  const cardTitle = createCards(item);
-  element.prepend(cardTitle);
-};
+// const createNewCard = (item, element) => {
+//   const cardTitle = createCards(item);
+//   element.prepend(cardTitle);
+// };
 
-function createCards(item) {
-  const card = new Card(item, '#card-add')
-  const newCard = card.generateCard()
-  return newCard;
-};
+// function createCards(item) {
+//   const card = new Card(item, '#card-add')
+//   const newCard = card.generateCard()
+//   return newCard;
+// };
 
 function submitEditFormHandler(evt) {
   evt.preventDefault();
@@ -49,22 +49,22 @@ function submitEditFormHandler(evt) {
   removePopup(popupEditProfile)
 };
 
-function submitCardHandler(evt) {
-  evt.preventDefault();
-  const initialCard = {
-    name: titleInput.value,
-    link: urlInput.value
-  };
-  createNewCard(initialCard, cardElement);
-  removePopup(popupCardElement);
-};
+// function submitCardHandler(evt) {
+//   evt.preventDefault();
+//   const initialCard = {
+//     name: titleInput.value,
+//     link: urlInput.value
+//   };
+//   createNewCard(initialCard, cardElement);
+//   removePopup(popupCardElement);
+// };
 
 export function addPopup(popup) {
   popup.classList.add("popup_is-opened");
   document.addEventListener("keydown", closePopupEscape);
 };
 
-function removePopup(popup) {
+export function removePopup(popup) {
   popup.classList.remove("popup_is-opened");
   document.removeEventListener("keydown", closePopupEscape);
 };
@@ -98,4 +98,4 @@ popupEditProfile.addEventListener("mousedown", closePopupOverlay);
 popupCardElement.addEventListener("mousedown", closePopupOverlay);
 popupPhotoElement.addEventListener("mousedown", closePopupOverlay);
 formEditPopup.addEventListener('submit', submitEditFormHandler);
-formAddPopup.addEventListener('submit', submitCardHandler);
+// formAddPopup.addEventListener('submit', submitCardHandler);
