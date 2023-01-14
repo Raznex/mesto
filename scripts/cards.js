@@ -1,4 +1,5 @@
-const initialCards = new Todo([
+import {Todo} from './todo.js'
+export const initialCards = new Todo([
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -25,5 +26,3 @@ const initialCards = new Todo([
   }
 ]);
 
-const cardSpace = document.querySelector('.elements');
-initialCards.generate(cardSpace);

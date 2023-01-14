@@ -1,5 +1,4 @@
-// import {initialCards} from "./cards.js";
-// import {CardNan} from "./cardNan.js";
+import {initialCards} from './cards.js'
 const nameForm = document.querySelector('.profile__name');
 const popupEditProfile = document.querySelector(".popup_type_profile-edit");
 export const popupCardElement = document.querySelector(".popup_type_card-add");
@@ -10,24 +9,24 @@ const popupCardOpenButton = document.querySelector('.profile__add-button');
 const popupCloseButtonList = document.querySelectorAll(".popup__close");
 const nameInput = popupEditProfile.querySelector(".popup__input_type_name");
 const jobInput = popupEditProfile.querySelector(".popup__input_type_profession");
-const titleInput = popupCardElement.querySelector('.popup__input_type_name');
-const urlInput = popupCardElement.querySelector('.popup__input_type_profession');
+const titleInput = document.querySelector('.popup__input_type_name');
+const urlInput = document.querySelector('.popup__input_type_profession');
 export const popupPhotoName = document.querySelector('.popup__figcaption')
 export const popUpPhotoOpenScreen = document.querySelector('.popup__image')
 const formEditPopup = popupEditProfile.querySelector('#popup-edit-form')
-const buttonSubmitCard = popupCardElement.querySelector('.popup__save')
+const buttonSubmitCard = document.querySelector('.popup__save')
 
 const changeNameEditPopup = () => {
   nameInput.value = nameForm.textContent;
   jobInput.value = professionForm.textContent;
 };
-
 const cleanCardPopupValue = () => {
-  buttonSubmitCard.classList.add('popup__save_disabled');
-  buttonSubmitCard.disabled = true;
+  // buttonSubmitCard.classList.add('popup__save_disabled');
+  // buttonSubmitCard.disabled = true;
   titleInput.value = '';
   urlInput.value = '';
 };
+initialCards.generate(popupCardElement)
 
 function submitEditFormHandler(evt) {
   evt.preventDefault();

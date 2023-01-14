@@ -1,6 +1,8 @@
-class List extends Generate {
+import {Generate} from './generate.js'
+import {Card} from './card.js'
+export class List extends Generate {
   static selectors = {
-    space: '.card'
+    space: '.element-space'
 }
   constructor(cards) {
     super(List.selectors.space);
@@ -8,15 +10,15 @@ class List extends Generate {
   }
 
   generate(where) {
-    this._cards.forEach(nameCard, linkCard => {
-      this.add(nameCard, linkCard)
+    this._cards.forEach(cards => {
+      this.add(cards.name, cards.link)
     })
 
     super.generate(where)
   }
 
   add(nameCard, linkCard) {
-    const card = new CardNan (nameCard, linkCard)
+    const card = new Card (nameCard, linkCard)
     card.generate(this._element)
   }
 }

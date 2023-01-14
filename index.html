@@ -27,10 +27,7 @@
     </div>
     <button name='Popup-add-open' type="button" class="profile__add-button"></button>
   </section>
-  <div class="card">
-  <section class="elements">
-  </section>
-  </div>
+  <section class="card"></section>
 </main>
 <footer class="footer">
   <p class="footer__author">&copy; 2020 Mesto Russia</p>
@@ -57,7 +54,16 @@
   </div>
 </div>
 <div name="popup-card" class="popup popup_type_card-add">
-  <div class="popup__container">
+</div>
+<div name="popup_photo" class="popup popup_type_photo">
+  <figure class="popup__caption">
+    <button name='Popup-photo-close' class="popup__close"></button>
+    <img src=" " alt="" class="popup__image">
+    <figcaption class="popup__figcaption"></figcaption>
+  </figure>
+</div>
+<template id="popup_card-add">
+  <div id="popup_container-card" class="popup__container">
     <button name='Popup-Card-Close' class="popup__close"></button>
     <h2 class="popup__title">Новое место</h2>
     <form id="popup-add-form" class="popup__form" novalidate>
@@ -71,14 +77,10 @@
       <button type="submit" name="button_add_save" class="popup__save">Создать</button>
     </form>
   </div>
-</div>
-<div name="popup_photo" class="popup popup_type_photo">
-  <figure class="popup__caption">
-    <button name='Popup-photo-close' class="popup__close"></button>
-    <img src=" " alt="" class="popup__image">
-    <figcaption class="popup__figcaption"></figcaption>
-  </figure>
-</div>
+</template>
+<template class="element-space">
+  <section class="elements"></section>
+</template>
 <template id="card-add">
   <article class="element">
     <div class="element__photocard">
@@ -93,11 +95,7 @@
     </div>
   </article>
 </template>
-<script src="./scripts/validate.js"></script>
-<script src="./scripts/generate.js"></script>
-<script src="./scripts/todo.js"></script>
-<script src="./scripts/list.js"></script>
-<script src="./scripts/cards.js"></script>
+<!--<script src="./scripts/validate.js"></script>-->
 <script type="module" src="./scripts/script.js"></script>
 </body>
 </html>

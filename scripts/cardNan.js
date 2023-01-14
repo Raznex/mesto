@@ -1,4 +1,3 @@
-import {initialCards} from './cards.js'
 import {
   addPopup,
   removePopup,
