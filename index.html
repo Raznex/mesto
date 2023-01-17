@@ -27,7 +27,7 @@
     </div>
     <button name='Popup-add-open' type="button" class="profile__add-button"></button>
   </section>
-  <section class="card"></section>
+  <section class="elements"></section>
 </main>
 <footer class="footer">
   <p class="footer__author">&copy; 2020 Mesto Russia</p>
@@ -54,6 +54,20 @@
   </div>
 </div>
 <div name="popup-card" class="popup popup_type_card-add">
+  <div class="popup__container">
+    <button name='Popup-Card-Close' class="popup__close"></button>
+    <h2 class="popup__title">Новое место</h2>
+    <form id="popup-add-form" class="popup__form" novalidate>
+      <input name='Popup-Card-name' id="add-name-input" type="text" value="" placeholder="Название" minlength="2"
+            maxlength="30" required
+            class="popup__input popup__input_type_name">
+      <span id="add-name-input-error" class="popup__input-span"></span>
+      <input name='Popup-Card-src' id="add-url-input" type="url" value="" placeholder="Ссылка на картинку" required
+             class="popup__input popup__input_type_profession">
+      <span id="add-url-input-error" class="popup__input-span popup__input-span_type_profession"></span>
+      <button type="submit" name="button_add_save" class="popup__save">Создать</button>
+    </form>
+  </div>
 </div>
 <div name="popup_photo" class="popup popup_type_photo">
   <figure class="popup__caption">
@@ -62,25 +76,6 @@
     <figcaption class="popup__figcaption"></figcaption>
   </figure>
 </div>
-<template id="popup_card-add">
-  <div id="popup_container-card" class="popup__container">
-    <button name='Popup-Card-Close' class="popup__close"></button>
-    <h2 class="popup__title">Новое место</h2>
-    <form id="popup-add-form" class="popup__form" novalidate>
-      <input name='Popup-Card-name' id="add-name-input" type="text" value="" placeholder="Название" minlength="2"
-             maxlength="30" required
-             class="popup__input popup__input_type_name">
-      <span id="add-name-input-error" class="popup__input-span"></span>
-      <input name='Popup-Card-src' id="add-url-input" type="url" value="" placeholder="Ссылка на картинку" required
-             class="popup__input popup__input_type_profession">
-      <span id="add-url-input-error" class="popup__input-span popup__input-span_type_profession"></span>
-      <button type="submit" name="button_add_save" class="popup__save">Создать</button>
-    </form>
-  </div>
-</template>
-<template class="element-space">
-  <section class="elements"></section>
-</template>
 <template id="card-add">
   <article class="element">
     <div class="element__photocard">
@@ -95,7 +90,7 @@
     </div>
   </article>
 </template>
-<!--<script src="./scripts/validate.js"></script>-->
+<!--<script src="./scripts/formValidator.js"></script>-->
 <script type="module" src="./scripts/script.js"></script>
 </body>
 </html>
