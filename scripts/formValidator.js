@@ -1,68 +1,78 @@
-class FormValidator {
+export class FormValidator {
   static enableValidation = {
     formSelector: ".popup__form",
     inputSelector: ".popup__input",
     submitButtonSelector: ".popup__save",
     inactiveButtonClass: "popup__save_disabled",
-    inputErrorClass: "popup__input-span_type_error",
-    errorClass: "popup__input-span_type_error-visible",
-    popup: "popup"
+    inputErrorClass: "popup__input_type_error-visible",
+    errorClass: "popup__input-span_type_error",
   };
 
-  constructor() {
+  constructor(form) {
     this._input = FormValidator.enableValidation.inputSelector;
-    this._error = document.querySelector('#edit-name-input-error');
-    // this._isFormValid = this._inputs.every(this._input => this._input.validity.valid);
+    this._submitButton = FormValidator.enableValidation.submitButtonSelector;
+    this._inactiveButton = FormValidator.enableValidation.inactiveButtonClass;
+    this._inputError = FormValidator.enableValidation.inputErrorClass;
+    this._classError = FormValidator.enableValidation.errorClass;
+    this._form = form;
+    this._inputList = [...this._form.querySelectorAll(this._input)];
+    this._buttonElement = this._form.querySelector(this._submitButton);
   }
 
-  _spawnValidityMessage() {
-    this._error.textContent = this._input.validationMessage;
-    this._error.classList.add(FormValidator.enableValidation.inputErrorClass);
-    this._input.classList.add(FormValidator.enableValidation.errorClass);
+  _spawnValidityMessage(input, errorMessage) {
+    const error = document.querySelector(`#${input.id}-error`)
+    error.textContent = errorMessage;
+    error.classList.add(this._classError);
+    input.classList.add(this._inputError);
   }
 
-  _removeValidityMessage() {
-    this._error.textContent = '';
-    this._error.classList.remove(FormValidator.enableValidation.inputErrorClass);
-    this._input.classList.remove(FormValidator.enableValidation.errorClass);
+  _removeValidityMessage(input) {
+    const error = document.querySelector(`#${input.id}-error`)
+    error.textContent = '';
+    error.classList.remove(this._classError);
+    input.classList.remove(this._inputError);
   }
 
-  _checkValidity = () => {
-    if (this._input.validity.valid) {
-      this._removeValidityMessage()
+  _checkValidity = (input) => {
+    if (!input.validity.valid) {
+    this._spawnValidityMessage(input, input.validationMessage)
     } else {
-      this._spawnValidityMessage()
+      this._removeValidityMessage(input)
+    }
+  }
+  _toggleButtonDisabled() {
+    const isFormValid = this._inputList.every((input) => input.validity.valid)
+    if (!isFormValid) {
+      this._buttonElement.classList.add(this._inactiveButton);
+      this._buttonElement.disabled = true;
+    } else {
+      this._buttonElement.classList.remove(this._inactiveButton);
+      this._buttonElement.disabled = '';
     }
   }
 
-
-  // _toggleButtonDisabled() {
-  //   if (this._isFormValid) {
-  //     this._button.classList.remove(FormValidator.enableValidation.inactiveButtonClass);
-  //     this._button.disabled = "";
-  //   } else {
-  //     this._button.classList.add(FormValidator.enableValidation.inactiveButtonClass);
-  //     this._button.disabled = true;
-  //   }
-  // }
-
-  enableValidation() {
-    this._forms = [...document.querySelectorAll(FormValidator.enableValidation.formSelector)]
-    this._forms.forEach((form) => {
-      this._inputs = [...form.querySelectorAll(FormValidator.enableValidation.inputSelector)];
-      this._button = form.querySelector(FormValidator.enableValidation.submitButtonSelector);
-      this._inputs.forEach(() => {
-        this._input.addEventListener("input", () => {
-          this._checkValidity();
-          // this._toggleButtonDisabled();
-        });
+  _setEventListener () {
+    this._inputList.forEach((input) => {
+      input.addEventListener("input", () => {
+        this._checkValidity(input);
+        this._toggleButtonDisabled();
       });
-    });
+    })
+  }
+ disableValidation (buttonActivated) {
+   this._inputList.forEach((input) => {
+     this._removeValidityMessage(input);
+   });
+   this._buttonElement.classList.toggle(
+     this._inactiveButton,
+     buttonActivated
+   );
+   this._buttonElement.disabled = buttonActivated;
+ }
+  enableValidation() {
+    this._setEventListener();
   }
 }
-
-const checkValidEditForm = new FormValidator ();
-checkValidEditForm.enableValidation()
 
 
 

@@ -1,4 +1,5 @@
 import {Card} from './card.js'
+import {FormValidator} from "./formValidator.js";
 import {initialCards} from "./cards.js";
 
 const nameForm = document.querySelector('.profile__name');
@@ -25,8 +26,6 @@ const changeNameEditPopup = () => {
   jobInput.value = professionForm.textContent;
 };
 const cleanCardPopupValue = () => {
-  // buttonSubmitCard.classList.add('popup__save_disabled');
-  // buttonSubmitCard.disabled = true;
   titleInput.value = '';
   urlInput.value = '';
 };
@@ -57,7 +56,10 @@ const submitAddFormHandler = (evt) => {
   removePopup(popupCardElement);
 };
 
-// продолжение старого кода
+// Валидация формы
+
+const formValidProfile = new FormValidator(formEditPopup);
+const formValidCard = new FormValidator(formAddPopup);
 
 function submitEditFormHandler(evt) {
   evt.preventDefault();
@@ -95,10 +97,12 @@ popupCloseButtonList.forEach(btn => {
 
 popupOpenButton.addEventListener("click", function () {
   changeNameEditPopup();
+  formValidProfile.disableValidation(false);
   addPopup(popupEditProfile);
 });
 popupCardOpenButton.addEventListener("click", function () {
   cleanCardPopupValue();
+  formValidCard.disableValidation(true);
   addPopup(popupCardElement);
 });
 popupEditProfile.addEventListener("mousedown", closePopupOverlay);
@@ -106,4 +110,6 @@ popupCardElement.addEventListener("mousedown", closePopupOverlay);
 popupPhotoElement.addEventListener("mousedown", closePopupOverlay);
 formEditPopup.addEventListener('submit', submitEditFormHandler);
 formAddPopup.addEventListener('submit', submitAddFormHandler);
+formValidProfile.enableValidation();
+formValidCard.enableValidation();
 
