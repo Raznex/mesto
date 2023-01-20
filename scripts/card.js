@@ -14,8 +14,8 @@ export class Card {
       .cloneNode(true);
   };
 
-  _handelButtonLike(evt) {
-    evt.target.classList.toggle("element__like-button_active");
+  _handelButtonLike() {
+    this._likeButton.classList.toggle("element__like-button_active");
   };
 
   _handelButtonDelete() {
@@ -23,11 +23,11 @@ export class Card {
   };
 
   _setEventListener() {
-    this._likeButton.addEventListener('click', (evt) => {
-      this._handelButtonLike(evt);
+    this._likeButton.addEventListener('click', () => {
+      this._handelButtonLike();
     });
-    this._deleteButton.addEventListener('click', (evt) => {
-      this._handelButtonDelete(evt)
+    this._deleteButton.addEventListener('click', () => {
+      this._handelButtonDelete()
     });
     this._cardImage.addEventListener('click', () => {
       this._handelCardClick(this._title, this._image);
@@ -46,11 +46,3 @@ export class Card {
     return this._element;
   };
 }
-
-// initialCards.forEach((item) => {
-//   const card = new CardNan(item, '#card-add');
-//   const cardElement = card.generateCard();
-//
-//   document.querySelector('.elements').append(cardElement);
-// });
-

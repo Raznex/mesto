@@ -1,19 +1,10 @@
 export class FormValidator {
-  static enableValidation = {
-    formSelector: ".popup__form",
-    inputSelector: ".popup__input",
-    submitButtonSelector: ".popup__save",
-    inactiveButtonClass: "popup__save_disabled",
-    inputErrorClass: "popup__input_type_error-visible",
-    errorClass: "popup__input-span_type_error",
-  };
-
-  constructor(form) {
-    this._input = FormValidator.enableValidation.inputSelector;
-    this._submitButton = FormValidator.enableValidation.submitButtonSelector;
-    this._inactiveButton = FormValidator.enableValidation.inactiveButtonClass;
-    this._inputError = FormValidator.enableValidation.inputErrorClass;
-    this._classError = FormValidator.enableValidation.errorClass;
+  constructor(form, cfg) {
+    this._input = cfg.inputSelector;
+    this._submitButton = cfg.submitButtonSelector;
+    this._inactiveButton = cfg.inactiveButtonClass;
+    this._inputError = cfg.inputErrorClass;
+    this._classError = cfg.errorClass;
     this._form = form;
     this._inputList = [...this._form.querySelectorAll(this._input)];
     this._buttonElement = this._form.querySelector(this._submitButton);
@@ -59,20 +50,13 @@ export class FormValidator {
       });
     })
   }
- disableValidation (buttonActivated) {
+ disableValidation () {
+   this._toggleButtonDisabled()
    this._inputList.forEach((input) => {
      this._removeValidityMessage(input);
    });
-   this._buttonElement.classList.toggle(
-     this._inactiveButton,
-     buttonActivated
-   );
-   this._buttonElement.disabled = buttonActivated;
  }
   enableValidation() {
     this._setEventListener();
   }
 }
-
-
-
