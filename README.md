@@ -11,6 +11,7 @@
 * JavaScript
 * ES6 Modules
 * ООП
+* WebPack
 
 ### Функционал
 * Добавление карточки

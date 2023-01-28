@@ -8,6 +8,7 @@ export class FormValidator {
     this._form = form;
     this._inputList = [...this._form.querySelectorAll(this._input)];
     this._buttonElement = this._form.querySelector(this._submitButton);
+
   }
 
   _spawnValidityMessage(input, errorMessage) {
@@ -18,7 +19,7 @@ export class FormValidator {
   }
 
   _removeValidityMessage(input) {
-    const error = document.querySelector(`#${input.id}-error`)
+    const error = document.querySelector(`#${input.id}-error`);
     error.textContent = '';
     error.classList.remove(this._classError);
     input.classList.remove(this._inputError);
@@ -49,6 +50,7 @@ export class FormValidator {
         this._toggleButtonDisabled();
       });
     })
+
   }
  disableValidation () {
    this._toggleButtonDisabled()
