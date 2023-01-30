@@ -1,10 +1,10 @@
 {
   "name": "mesto",
   "version": "1.0.0",
-  "description": "## О проекте Проект создан для обучения изменения формы с помощью JavaScript. Проект работает как для смартфонов так и для больших мониторов, форма пока что не подключена к серверу, изменения не сохраняются.",
-  "main": "index.js",
+  "description": "Проект создан для обучения изменения формы с помощью JavaScript.\r Проект работает как для смартфонов так и для больших мониторов, форма пока что не подключена к серверу, изменения не сохраняются.",
+  "main": "babel.config.js",
   "scripts": {
-    "build": "rd /s /q dist &&  webpack",
+    "build": "rimraf dist && webpack",
     "dev": "webpack-dev-server"
   },
   "repository": {
@@ -17,24 +17,23 @@
     "url": "https://github.com/Raznex/mesto/issues"
   },
   "homepage": "https://github.com/Raznex/mesto#readme",
+  "dependencies": {
+    "core-js": "^3.27.2",
+    "jquery": "^3.6.3"
+  },
   "devDependencies": {
     "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.20.2",
     "autoprefixer": "^10.4.13",
     "babel-loader": "^9.1.2",
     "clean-webpack-plugin": "^4.0.0",
-    "core-js": "^3.27.2",
     "css-loader": "^6.7.3",
     "cssnano": "^5.1.14",
+    "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.7.2",
     "postcss-loader": "^7.0.2",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1"
-  },
-  "dependencies": {
-    "-": "^0.0.1",
-    "html-webpack-plugin": "^5.5.0",
-    "jquery": "^3.6.3"
   }
 }

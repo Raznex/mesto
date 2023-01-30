@@ -78,7 +78,6 @@ const popupProfileEdit = new PopupWithForm(".popup_type_profile-edit", {
       userName: userName,
       userInfo: userProfession,
     });
-    console.log(user)
     popupProfileEdit.close();
   },
 });
