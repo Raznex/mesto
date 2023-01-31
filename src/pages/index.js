@@ -3,16 +3,14 @@ import {
   enableValidation as cfg,
   nameInput,
   jobInput,
-  cardList,
+  cardsContainer,
   popupCardOpenButton,
   popupOpenButton,
-  professionForm,
-  nameForm,
   formEditPopup,
   formAddPopup,
 } from "../constants/constant.js";
-import {Card} from '../components/card.js'
-import {FormValidator} from "../components/formValidator.js";
+import {Card} from '../components/Card.js'
+import {FormValidator} from "../components/FormValidator.js";
 import {Section} from "../components/Section.js";
 import {PopupWithImage} from "../components/PopupWithImage.js";
 import {PopupWithForm} from "../components/PopupWithForm.js";
@@ -41,7 +39,7 @@ const cardsSection = new Section(
       cardsSection.addItem(renderCard(item));
     },
   },
-  cardList
+  cardsContainer
 );
 cardsSection.renderItem()
 // класс для создания карточек
@@ -61,13 +59,12 @@ popupAddCard.setEventListener();
 popupCardOpenButton.addEventListener("click", () => {
   formValidCard.disableValidation();
   popupAddCard.open();
-  formAddPopup.reset();
 });
 
 // Класс добавления информации о пользователе
 const user = new UserInfo({
-  profileUserName: nameForm,
-  profileUserInfo: professionForm
+  profileUserNameSelector: '.profile__name',
+  profileUserInfoSelector: '.profile__profession'
 });
 
 
@@ -88,6 +85,7 @@ popupOpenButton.addEventListener("click", () => {
   const {userName, userInfo} = user.getUserInfo();
   nameInput.value = userName;
   jobInput.value = userInfo;
+
   formValidProfile.disableValidation();
   popupProfileEdit.open();
 });

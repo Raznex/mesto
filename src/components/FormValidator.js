@@ -39,7 +39,7 @@ export class FormValidator {
       this._buttonElement.disabled = true;
     } else {
       this._buttonElement.classList.remove(this._inactiveButton);
-      this._buttonElement.disabled = '';
+      this._buttonElement.disabled = false;
     }
   }
 
