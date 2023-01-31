@@ -32,20 +32,13 @@ export const enableValidation = {
   inputErrorClass: "popup__input_type_error-visible",
   errorClass: "popup__input-span_type_error",
 };
-export const nameForm = document.querySelector('.profile__name');
+
 const popupEditProfile = document.querySelector(".popup_type_profile-edit");
 const popupCardElement = document.querySelector(".popup_type_card-add");
-export const popupPhotoElement = document.querySelector(".popup_type_photo");
-export const professionForm = document.querySelector('.profile__profession');
 export const popupOpenButton = document.querySelector(".profile__edit-button");
 export const popupCardOpenButton = document.querySelector('.profile__add-button');
-const popupCloseButtonList = document.querySelectorAll(".popup__close");
 export const nameInput = popupEditProfile.querySelector(".popup__input_type_name");
 export const jobInput = popupEditProfile.querySelector(".popup__input_type_profession");
-export const titleInput = popupCardElement.querySelector('.popup__input_type_name');
-export const urlInput = popupCardElement.querySelector('.popup__input_type_profession');
-const popupPhotoName = document.querySelector('.popup__figcaption')
-const popUpPhotoOpenScreen = document.querySelector('.popup__image')
 export const formEditPopup = popupEditProfile.querySelector('#popup-edit-form')
-export const cardList = document.querySelector('.elements');
+export const cardsContainer = '.elements';
 export const formAddPopup = popupCardElement.querySelector('#popup-add-form')

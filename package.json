@@ -2,9 +2,9 @@
   "name": "mesto",
   "version": "1.0.0",
   "description": "Проект создан для обучения изменения формы с помощью JavaScript.\r Проект работает как для смартфонов так и для больших мониторов, форма пока что не подключена к серверу, изменения не сохраняются.",
-  "main": "babel.config.js",
+  "main": "index.js",
   "scripts": {
-    "build": "rimraf dist && webpack",
+    "build": "webpack",
     "dev": "webpack-dev-server"
   },
   "repository": {
