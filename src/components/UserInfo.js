@@ -5,6 +5,7 @@ export class UserInfo {
   }
 
   getUserInfo() {
+    console.log(this._userName)
     return {
       userName: this._userName.textContent,
       userInfo: this._userInfo.textContent
