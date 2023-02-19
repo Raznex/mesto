@@ -1,11 +1,13 @@
 {
   "name": "mesto",
   "version": "1.0.0",
-  "description": "Проект создан для обучения изменения формы с помощью JavaScript.\r Проект работает как для смартфонов так и для больших мониторов, форма пока что не подключена к серверу, изменения не сохраняются.",
+  "description": "Проект Mesto",
   "main": "index.js",
   "scripts": {
     "build": "rimraf dist && webpack --mode production",
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -28,6 +30,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.3",
     "cssnano": "^5.1.14",
+    "gh-pages": "^5.0.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.7.2",
     "postcss-loader": "^7.0.2",
