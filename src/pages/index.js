@@ -1,5 +1,4 @@
 import {
-  initialCards,
   enableValidation as cfg,
   nameInput,
   jobInput,
@@ -7,7 +6,7 @@ import {
   popupCardOpenButton,
   popupOpenButton,
   formEditPopup,
-  formAddPopup,
+  formAddPopup, options,
 } from "../constants/constant.js";
 import {Card} from '../components/Card.js'
 import {FormValidator} from "../components/FormValidator.js";
@@ -15,42 +14,62 @@ import {Section} from "../components/Section.js";
 import {PopupWithImage} from "../components/PopupWithImage.js";
 import {PopupWithForm} from "../components/PopupWithForm.js";
 import {UserInfo} from "../components/UserInfo.js";
+import {PopupConfirmDelete} from "../components/PopupConfirmDelete.js";
+import {Api} from "../components/Api.js";
 import './index.css'
+
+const api = new Api(options)
+
+// Добавление попапа картинки на веь экран
+const popupImage = new PopupWithImage(".popup_type_photo");
+popupImage.setEventListener();
 
 // функция для открытия попапа с фото
 const handleCardClick = (title, link) => {
   popupImage.open(title, link);
 }
-// Добавление попапа картинки на веь экран
-const popupImage = new PopupWithImage(".popup_type_photo");
-popupImage.setEventListener();
 
 // рендер карточки
 const renderCard = (data) => {
-  const card = new Card(data, '#card-add', handleCardClick)
+  const card = new Card(data, '#card-add', {
+    handleCardClick,
+    handleDeleteCard: () => {
+      popupDeleteCard.open();
+      popupDeleteCard.setSubmit(() => {
+        api
+          .deleteCard(data._id)
+          .then(() => {
+            card.handelDelete();
+            popupDeleteCard.close()
+          })
+          .catch(console.log)
+      })
+    },
+  })
   return card.generateCard()
 }
 
 // класс Section для вставки карточек
 const cardsSection = new Section(
   {
-    items: initialCards,
     renderer: (item) => {
       cardsSection.addItem(renderCard(item));
     },
   },
   cardsContainer
 );
-cardsSection.renderItem()
+
 // класс для создания карточек
 const popupAddCard = new PopupWithForm(".popup_type_card-add", {
   submitFormHandler: ({cardName, cardSrc}) => {
-    const card = renderCard({
-      name: cardName,
-      link: cardSrc,
-    });
-    cardsSection.addItem(card);
-    popupAddCard.close();
+    api
+      .createCard({name: cardName, link: cardSrc})
+      .then((cardInfo) => {
+        const card = renderCard({...cardInfo, owner: user.id})
+        cardsSection.addItem(card);
+        popupAddCard.close();
+      })
+      .catch(console.log)
   },
 });
 popupAddCard.setEventListener();
@@ -67,29 +86,38 @@ const user = new UserInfo({
   profileUserInfoSelector: '.profile__profession'
 });
 
+// Собираем промисы в один для работы с карточками
+Promise.all([api.getInfoProfile(), api.getInitialCards()]).then(
+  ([info, res]) => {
+    user.setUserInfo(info);
+    cardsSection.renderItem(res);
+  }
+).catch(console.log);
 
 // Класс редактирования профиля
 const popupProfileEdit = new PopupWithForm(".popup_type_profile-edit", {
   submitFormHandler: ({userName, userProfession}) => {
-    user.setUserInfo({
-      userName: userName,
-      userInfo: userProfession,
-    });
-    popupProfileEdit.close();
+    api
+      .editProfile({name: userName, about: userProfession})
+      .then((userInfo) => {
+        user.setUserInfo(userInfo);
+        popupProfileEdit.close();
+      })
+      .catch(console.log)
   },
 });
 popupProfileEdit.setEventListener();
 
 // Открытие формы редактирования профиля
 popupOpenButton.addEventListener("click", () => {
-  const {userName, userInfo} = user.getUserInfo();
-  nameInput.value = userName;
-  jobInput.value = userInfo;
-
+  popupProfileEdit.setValueInput(user.getUserInfo())
   formValidProfile.disableValidation();
   popupProfileEdit.open();
 });
 
+// Удаление карточки
+const popupDeleteCard = new PopupConfirmDelete('.popup_type_delete-card')
+popupDeleteCard.setEventListener()
 
 // Валидация формы
 

@@ -15,13 +15,15 @@
 <main class="content">
   <section class="profile">
     <div class="profile__card">
-      <div class="profile__avatar"></div>
+      <button class="profile__container-avatar" type="button">
+        <img class="profile__avatar" src="<%=require('./images/profile__avatar.jpg')%>" alt="Аватар">
+      </button>
       <div class="profile__profile-info">
         <div class="profile__title">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <h1 class="profile__name"></h1>
           <button name='popup-edit-open' type="button" class="profile__edit-button"></button>
         </div>
-        <p class="profile__profession">Исследователь океана</p>
+        <p class="profile__profession"></p>
       </div>
     </div>
     <button name='popup-add-open' type="button" class="profile__add-button"></button>
@@ -58,8 +60,8 @@
     <h2 class="popup__title">Новое место</h2>
     <form id="popup-add-form" class="popup__form" novalidate>
       <input name='cardName' id="add-name-input" type="text" placeholder="Название" minlength="2"
-            maxlength="30" required
-            class="popup__input popup__input_type_name">
+             maxlength="30" required
+             class="popup__input popup__input_type_name">
       <span id="add-name-input-error" class="popup__input-span"></span>
       <input name='cardSrc' id="add-url-input" type="url" placeholder="Ссылка на картинку" required
              class="popup__input popup__input_type_profession">
@@ -75,6 +77,28 @@
     <figcaption class="popup__figcaption"></figcaption>
   </figure>
 </div>
+<div name="popup_delete-card" class="popup popup_type_delete-card">
+  <div class="popup__container">
+    <button name='popup_delete-card_close' class="popup__close"></button>
+    <form class="popup__form">
+      <h2 class="popup__title popup__title_type_delete-card">Вы уверены?</h2>
+      <button type="submit" name="button_yes" class="popup__save popup__save_type_delete-card">Да</button>
+    </form>
+  </div>
+</div>
+<div name="popup_new-avatar" class="popup popup_type_new-avatar">
+  <div class="popup__container">
+    <button name='popup-Card-Close' class="popup__close"></button>
+    <h2 class="popup__title">Обновить аватар</h2>
+    <form id="popup-new-avatar-form" class="popup__form" novalidate>
+      <input name='newAvatar' id="change-new-avatar" type="url" placeholder="Ссылка на картинку" minlength="2"
+             maxlength="30" required
+             class="popup__input popup__input_type_name">
+      <span id="new-avatar-input-error" class="popup__input-span"></span>
+      <button type="submit" name="button_add_save" class="popup__save">Создать</button>
+    </form>
+  </div>
+</div>
 <template id="card-add">
   <article class="element">
     <div class="element__photocard">
@@ -84,8 +108,11 @@
     </div>
     <div class="element__vote">
       <h2 class="element__title"></h2>
-      <button type="button" class="element__like-button">
-      </button>
+      <div class="element__like">
+        <button type="button" class="element__like-button">
+        </button>
+        <p class="element__counter">0</p>
+      </div>
     </div>
   </article>
 </template>

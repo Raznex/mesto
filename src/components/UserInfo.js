@@ -5,15 +5,15 @@ export class UserInfo {
   }
 
   getUserInfo() {
-    console.log(this._userName)
     return {
       userName: this._userName.textContent,
       userInfo: this._userInfo.textContent
     }
   }
 
-  setUserInfo({userName, userInfo}) {
-    this._userName.textContent = userName;
-    this._userInfo.textContent = userInfo;
+  setUserInfo({name, about, _id}) {
+    this._userName.textContent = name;
+    this._userInfo.textContent = about;
+    this.id = _id
   }
 }
