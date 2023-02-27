@@ -31,7 +31,7 @@ const handleCardClick = (title, link) => {
 
 // рендер карточки
 const renderCard = (data) => {
-  const card = new Card(data, '#card-add', {
+  const card = new Card({...data, myId: user.id}, '#card-add', {
     handleCardClick,
     handleDeleteCard: () => {
       popupDeleteCard.open();
@@ -44,6 +44,22 @@ const renderCard = (data) => {
           })
           .catch(console.log)
       })
+    },
+    handlePutLike: () => {
+      api
+        .setLike(data._id)
+        .then((res) => {
+          card.counterLikes(res.likes.length)
+        })
+        .catch(console.log);
+    },
+    handleDeleteLike: () => {
+      api
+        .deleteLike(data._id)
+        .then((res) => {
+          card.counterLikes(res.likes.length)
+        })
+        .catch(console.log);
     },
   })
   return card.generateCard()
@@ -59,27 +75,6 @@ const cardsSection = new Section(
   cardsContainer
 );
 
-// класс для создания карточек
-const popupAddCard = new PopupWithForm(".popup_type_card-add", {
-  submitFormHandler: ({cardName, cardSrc}) => {
-    api
-      .createCard({name: cardName, link: cardSrc})
-      .then((cardInfo) => {
-        const card = renderCard({...cardInfo, owner: user.id})
-        cardsSection.addItem(card);
-        popupAddCard.close();
-      })
-      .catch(console.log)
-  },
-});
-popupAddCard.setEventListener();
-
-// Слушатель кнопки добавить карточку
-popupCardOpenButton.addEventListener("click", () => {
-  formValidCard.disableValidation();
-  popupAddCard.open();
-});
-
 // Класс добавления информации о пользователе
 const user = new UserInfo({
   profileUserNameSelector: '.profile__name',
@@ -90,7 +85,7 @@ const user = new UserInfo({
 Promise.all([api.getInfoProfile(), api.getInitialCards()]).then(
   ([info, res]) => {
     user.setUserInfo(info);
-    cardsSection.renderItem(res);
+    cardsSection.renderItem(res, user);
   }
 ).catch(console.log);
 
@@ -113,6 +108,26 @@ popupOpenButton.addEventListener("click", () => {
   popupProfileEdit.setValueInput(user.getUserInfo())
   formValidProfile.disableValidation();
   popupProfileEdit.open();
+});
+// класс для создания карточек
+const popupAddCard = new PopupWithForm(".popup_type_card-add", {
+  submitFormHandler: ({cardName, cardSrc}) => {
+    api
+      .createCard({name: cardName, link: cardSrc})
+      .then((data) => {
+        const card = renderCard({...data, myId: user.id})
+        cardsSection.addItem(card);
+        popupAddCard.close();
+      })
+      .catch(console.log)
+  },
+});
+popupAddCard.setEventListener();
+
+// Слушатель кнопки добавить карточку
+popupCardOpenButton.addEventListener("click", () => {
+  formValidCard.disableValidation();
+  popupAddCard.open();
 });
 
 // Удаление карточки

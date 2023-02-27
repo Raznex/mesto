@@ -1,10 +1,15 @@
 export class Card {
-  constructor(data, templateSelector, {handleCardClick, handleDeleteCard}) {
+  constructor(data, templateSelector, {handleCardClick, handleDeleteCard, handlePutLike, handleDeleteLike}) {
     this._title = data.name;
     this._image = data.link;
+    this._likes = data.likes;
+    this.myId = data.myId;
+    this.ownerId = data.owner._id;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick
     this._handleDeleteCard = handleDeleteCard;
+    this._handleDeleteLike = handleDeleteLike;
+    this._handlePutLike = handlePutLike;
   };
 
   _getTemplate() {
@@ -15,13 +20,53 @@ export class Card {
       .cloneNode(true);
   };
 
-  _handelButtonLike() {
-    this._likeButton.classList.toggle("element__like-button_active");
+  _handelButtonPutLike() {
+    this._likeButton.classList.add("element__like-button_active");
   };
+
+  _handelButtonDeleteLike() {
+    this._likeButton.classList.remove("element__like-button_active");
+  };
+
+  _addLike() {
+    this._handelButtonPutLike();
+    this._handlePutLike()
+  }
+
+  _deleteLike() {
+    this._handelButtonDeleteLike()
+    this._handleDeleteLike()
+  }
+
+  _checkDeleteButton() {
+    if (this.myId !== this.ownerId) {
+      this._deleteButton.remove()
+    }
+    // console.log(this.ownerId === this.myId)
+    // console.log(this._likes)
+    console.log(this.ownerId)
+  }
+
+  _checkAmountLikes() {
+    this._likes.forEach((like) => {
+      if (like._id === this.myId)
+       this._addLike()
+    })
+
+  }
+
+  counterLikes(likes) {
+    this._indicatorLikes.textContent = likes
+  }
+
 
   _setEventListener() {
     this._likeButton.addEventListener('click', () => {
-      this._handelButtonLike();
+      if (this._likeButton.classList.contains('element__like-button_active')) {
+        this._deleteLike()
+      } else {
+        this._addLike()
+      }
     });
     this._deleteButton.addEventListener('click', () => {
       this._handleDeleteCard(this)
@@ -38,8 +83,12 @@ export class Card {
     this._cardImage.alt = this._title;
     this._deleteButton = this._element.querySelector('.element__delete-button');
     this._likeButton = this._element.querySelector('.element__like-button');
+    this._indicatorLikes = this._element.querySelector('.element__counter')
     this._element.querySelector('.element__title').textContent = this._title;
+    this.counterLikes(this._likes.length);
+    this._checkAmountLikes();
     this._setEventListener();
+    this._checkDeleteButton();
     return this._element;
   };
 
