@@ -53,6 +53,16 @@ export class Api {
     }).then(this._handleResponse);
   }
 
+  changeAvatar({avatar}) {
+    return fetch(`${this._url}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: avatar,
+      }),
+    }).then(this._handleResponse);
+  }
+
   setLike(id) {
     return fetch(
       `${this._url}/cards/likes/${id}`,

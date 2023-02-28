@@ -16,7 +16,7 @@
   <section class="profile">
     <div class="profile__card">
       <button class="profile__container-avatar" type="button">
-        <img class="profile__avatar" src="<%=require('./images/profile__avatar.jpg')%>" alt="Аватар">
+        <img class="profile__avatar" src="#" alt="Аватар">
       </button>
       <div class="profile__profile-info">
         <div class="profile__title">
@@ -92,10 +92,10 @@
     <h2 class="popup__title">Обновить аватар</h2>
     <form id="popup-new-avatar-form" class="popup__form" novalidate>
       <input name='newAvatar' id="change-new-avatar" type="url" placeholder="Ссылка на картинку" minlength="2"
-             maxlength="30" required
+             maxlength="infinity" required
              class="popup__input popup__input_type_name">
       <span id="new-avatar-input-error" class="popup__input-span"></span>
-      <button type="submit" name="button_add_save" class="popup__save">Создать</button>
+      <button type="submit" name="button_add_save" class="popup__save">Сохранить</button>
     </form>
   </div>
 </div>

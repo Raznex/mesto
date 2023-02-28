@@ -1,12 +1,13 @@
 import {
   enableValidation as cfg,
-  nameInput,
-  jobInput,
   cardsContainer,
   popupCardOpenButton,
   popupOpenButton,
+  popupChangeAvatarButton,
   formEditPopup,
-  formAddPopup, options,
+  formAddPopup,
+  options,
+  formAvatarPopup,
 } from "../constants/constant.js";
 import {Card} from '../components/Card.js'
 import {FormValidator} from "../components/FormValidator.js";
@@ -78,7 +79,8 @@ const cardsSection = new Section(
 // Класс добавления информации о пользователе
 const user = new UserInfo({
   profileUserNameSelector: '.profile__name',
-  profileUserInfoSelector: '.profile__profession'
+  profileUserInfoSelector: '.profile__profession',
+  profileUserAvatarSelector: '.profile__avatar'
 });
 
 // Собираем промисы в один для работы с карточками
@@ -103,12 +105,6 @@ const popupProfileEdit = new PopupWithForm(".popup_type_profile-edit", {
 });
 popupProfileEdit.setEventListener();
 
-// Открытие формы редактирования профиля
-popupOpenButton.addEventListener("click", () => {
-  popupProfileEdit.setValueInput(user.getUserInfo())
-  formValidProfile.disableValidation();
-  popupProfileEdit.open();
-});
 // класс для создания карточек
 const popupAddCard = new PopupWithForm(".popup_type_card-add", {
   submitFormHandler: ({cardName, cardSrc}) => {
@@ -124,11 +120,39 @@ const popupAddCard = new PopupWithForm(".popup_type_card-add", {
 });
 popupAddCard.setEventListener();
 
+// Создание попапа со сменой аватара
+const popupChangeAvatar = new PopupWithForm(".popup_type_new-avatar", {
+  submitFormHandler: ({newAvatar}) => {
+    api
+      .changeAvatar({avatar: newAvatar})
+      .then((userInfo) => {
+        user.setUserInfo(userInfo);
+        popupChangeAvatar.close();
+      })
+      .catch(console.log)
+  },
+});
+popupChangeAvatar.setEventListener();
+
 // Слушатель кнопки добавить карточку
 popupCardOpenButton.addEventListener("click", () => {
   formValidCard.disableValidation();
   popupAddCard.open();
 });
+
+// Открытие формы редактирования профиля
+popupOpenButton.addEventListener("click", () => {
+  popupProfileEdit.setValueInput(user.getUserInfo())
+  formValidProfile.disableValidation();
+  popupProfileEdit.open();
+});
+
+// Открытие формы смены аватара профиля
+popupChangeAvatarButton.addEventListener("click", () => {
+  // formValidAvatar.disableValidation();
+  popupChangeAvatar.open();
+});
+
 
 // Удаление карточки
 const popupDeleteCard = new PopupConfirmDelete('.popup_type_delete-card')
@@ -138,5 +162,7 @@ popupDeleteCard.setEventListener()
 
 const formValidProfile = new FormValidator(formEditPopup, cfg);
 const formValidCard = new FormValidator(formAddPopup, cfg);
+// const formValidAvatar = new FormValidator(formAvatarPopup, cfg);
 formValidProfile.enableValidation();
 formValidCard.enableValidation();
+// formValidAvatar.enableValidation()

@@ -42,15 +42,12 @@ export class Card {
     if (this.myId !== this.ownerId) {
       this._deleteButton.remove()
     }
-    // console.log(this.ownerId === this.myId)
-    // console.log(this._likes)
-    console.log(this.ownerId)
   }
 
   _checkAmountLikes() {
     this._likes.forEach((like) => {
       if (like._id === this.myId)
-       this._addLike()
+        this._addLike()
     })
 
   }
