@@ -33,11 +33,6 @@ export class Card {
     this._handlePutLike()
   }
 
-  _deleteLike() {
-    this._handelButtonDeleteLike()
-    this._handleDeleteLike()
-  }
-
   _checkDeleteButton() {
     if (this.myId !== this.ownerId) {
       this._deleteButton.remove()
@@ -49,20 +44,18 @@ export class Card {
       if (like._id === this.myId)
         this._addLike()
     })
-
   }
 
   counterLikes(likes) {
     this._indicatorLikes.textContent = likes
   }
 
-
   _setEventListener() {
     this._likeButton.addEventListener('click', () => {
       if (this._likeButton.classList.contains('element__like-button_active')) {
-        this._deleteLike()
+        this._handleDeleteLike()
       } else {
-        this._addLike()
+        this._handlePutLike()
       }
     });
     this._deleteButton.addEventListener('click', () => {

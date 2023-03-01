@@ -51,6 +51,7 @@ const renderCard = (data) => {
         .setLike(data._id)
         .then((res) => {
           card.counterLikes(res.likes.length)
+          card._handelButtonPutLike()
         })
         .catch(console.log);
     },
@@ -59,6 +60,7 @@ const renderCard = (data) => {
         .deleteLike(data._id)
         .then((res) => {
           card.counterLikes(res.likes.length)
+          card._handelButtonDeleteLike()
         })
         .catch(console.log);
     },
@@ -153,7 +155,7 @@ popupOpenButton.addEventListener("click", () => {
 
 // Открытие формы смены аватара профиля
 popupChangeAvatarButton.addEventListener("click", () => {
-  // formValidAvatar.disableValidation();
+  formValidAvatar.disableValidation();
   popupChangeAvatar.open();
 });
 
@@ -166,7 +168,7 @@ popupDeleteCard.setEventListener()
 
 const formValidProfile = new FormValidator(formEditPopup, cfg);
 const formValidCard = new FormValidator(formAddPopup, cfg);
-// const formValidAvatar = new FormValidator(formAvatarPopup, cfg);
+const formValidAvatar = new FormValidator(formAvatarPopup, cfg);
 formValidProfile.enableValidation();
 formValidCard.enableValidation();
-// formValidAvatar.enableValidation()
+formValidAvatar.enableValidation()
