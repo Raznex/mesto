@@ -6,6 +6,8 @@ export class PopupWithForm extends Popup {
     this._submitFormHandler = submitFormHandler
     this._form = this._popup.querySelector('.popup__form')
     this._inputs = this._form.querySelectorAll(".popup__input");
+    this._saveButton = this._popup.querySelector('.popup__save');
+    this._saveButtonValue = this._saveButton.textContent;
   }
 
   setValueInput(data) {
@@ -28,6 +30,14 @@ export class PopupWithForm extends Popup {
       evt.preventDefault();
       this._submitFormHandler(this._getInputValues());
     });
+  }
+
+  profileLoading(isLoading) {
+    if (isLoading) {
+      this._saveButton.textContent = 'Сохранение...'
+    } else {
+      this._saveButton.textContent = this._saveButtonValue
+    }
   }
 
   close() {

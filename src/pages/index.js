@@ -94,6 +94,7 @@ Promise.all([api.getInfoProfile(), api.getInitialCards()]).then(
 // Класс редактирования профиля
 const popupProfileEdit = new PopupWithForm(".popup_type_profile-edit", {
   submitFormHandler: ({userName, userProfession}) => {
+    popupProfileEdit.profileLoading(true);
     api
       .editProfile({name: userName, about: userProfession})
       .then((userInfo) => {
@@ -101,6 +102,7 @@ const popupProfileEdit = new PopupWithForm(".popup_type_profile-edit", {
         popupProfileEdit.close();
       })
       .catch(console.log)
+      .finally(() => popupProfileEdit.profileLoading(false))
   },
 });
 popupProfileEdit.setEventListener();
@@ -123,6 +125,7 @@ popupAddCard.setEventListener();
 // Создание попапа со сменой аватара
 const popupChangeAvatar = new PopupWithForm(".popup_type_new-avatar", {
   submitFormHandler: ({newAvatar}) => {
+    popupChangeAvatar.profileLoading(true);
     api
       .changeAvatar({avatar: newAvatar})
       .then((userInfo) => {
@@ -130,6 +133,7 @@ const popupChangeAvatar = new PopupWithForm(".popup_type_new-avatar", {
         popupChangeAvatar.close();
       })
       .catch(console.log)
+      .finally(() => popupProfileEdit.profileLoading(false))
   },
 });
 popupChangeAvatar.setEventListener();
